@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Signup.css';
@@ -6,15 +5,31 @@ import './Signup.css';
 import user_icon from '../Assets/user.png';
 import email_icon from '../Assets/mail.png';
 import password_icon from '../Assets/padlock.png';
+import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa'; // Importing the check icon
+
 
 const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showTick, setShowTick] = useState(false);
+    const [showCross, setShowCross] = useState(false); // New state variable for the cross sign
+
 
     const handleSignup = async (event) => {
         event.preventDefault();
+        
+        if (!name || !email || !password) {
+            console.log('One or more fields are empty');
+            setShowCross(true);
 
+            // Hide the cross sign after 1 second
+            setTimeout(() => {
+                setShowCross(false);
+            }, 2000);
+            return; // Exit the function
+        }
+        
         const formData = {
             name,
             email,
@@ -22,7 +37,7 @@ const Signup = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8080/api/users', {
+            const response = await fetch('http://localhost:8080/api/users/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,8 +47,20 @@ const Signup = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 // Handle successful signup (e.g., show a success message, redirect to another page)
+
+                // Show the tick icon
+                setShowTick(true);
+
+                // Clear the input boxes
+                setName("");
+                setEmail("");
+                setPassword("");
+
+                // Hide the tick icon after 1 second
+                setTimeout(() => {
+                    setShowTick(false);
+                }, 2000);
             } else {
                 console.error('Signup failed');
                 // Handle signup failure (e.g., show an error message)
@@ -50,6 +77,9 @@ const Signup = () => {
 
     return (
         <div className='container1'>
+            {showTick && <FaCheckCircle style={{ color: 'green', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
+            {showCross && <FaTimesCircle style={{ color: 'red', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
+
             <Link to="/">
             <button className="back-button1">&lt;</button>
             </Link>
