@@ -14,12 +14,27 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [showTick, setShowTick] = useState(false);
     const [showCross, setShowCross] = useState(false); // New state variable for the cross sign
-
+    const [emailError, setEmailError] = useState(""); // New state variable for the email error message
+    const [passwordError, setPasswordError] = useState("");
 
     const handleSignup = async (event) => {
         event.preventDefault();
-        
-        if (!name || !email || !password) {
+        setEmailError("");
+        setPasswordError("");
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+
+        if (!emailRegex.test(email)) {
+            setEmailError("Invalid email format");
+            setShowCross(true);
+        }
+
+        if (!passwordRegex.test(password)) {
+            setPasswordError("Password must contain at least one uppercase letter, one number, and be at least 6 characters long");
+            setShowCross(true);
+        }
+
+        if (!name || !email || !password || !emailRegex.test(email) || !passwordRegex.test(password)) {
             console.log('One or more fields are empty');
             setShowCross(true);
 
@@ -79,7 +94,8 @@ const Signup = () => {
         <div className='container1'>
             {showTick && <FaCheckCircle style={{ color: 'green', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
             {showCross && <FaTimesCircle style={{ color: 'red', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
-
+            {emailError && <p>{emailError}</p>}
+            {passwordError && <p>{passwordError}</p>}
             <Link to="/">
             <button className="back-button1">&lt;</button>
             </Link>
@@ -104,6 +120,8 @@ const Signup = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
+                    {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
+
                 </div>
                 <div className="input1">
                     <img src={password_icon} alt="Password" />
@@ -113,6 +131,7 @@ const Signup = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
                 </div>
             </div>
             <div className="submit-container">
