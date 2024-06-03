@@ -94,8 +94,6 @@ const Signup = () => {
         <div className='container1'>
             {showTick && <FaCheckCircle style={{ color: 'green', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
             {showCross && <FaTimesCircle style={{ color: 'red', position: 'absolute', top: '70%', left: '48%', zIndex: 1000, fontSize: '50px' }} />}
-            {emailError && <p>{emailError}</p>}
-            {passwordError && <p>{passwordError}</p>}
             <Link to="/">
             <button className="back-button1">&lt;</button>
             </Link>
