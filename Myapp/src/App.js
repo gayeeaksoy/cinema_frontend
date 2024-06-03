@@ -17,6 +17,8 @@ import Signup from './Components/Signup/Signup';
 import MainPage2 from './Components/MainPage2/MainPage2'; 
 import MyProfile from './Components/MyProfile/MyProfile'; 
 import Seats2 from './Components/Seats2/Seats2';
+import Admin from './Components/Admin/Admin';
+import SaloonOperation from './Components/SaloonOperation/SaloonOperation';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
           <Route path="/page2" element={<Page2/>} />
           <Route path="/buy-ticket2" element={<BuyTicket2 />} />
           <Route path="/seats2" element={<Seats2/>} />
+          <Route path="/admin" element={<Admin/>} />
+          <Route path="/saloon-operation" element={<SaloonOperation/>} />
         </Routes>
       </div>
     </Router>
