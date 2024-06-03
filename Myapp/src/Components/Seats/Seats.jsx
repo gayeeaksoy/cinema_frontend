@@ -36,7 +36,7 @@ const Seats = () => {
 
     try {
       const response = await fetch('http://localhost:8080/api/seats/save', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -101,7 +101,7 @@ const Seats = () => {
         </div>
       </div>
       
-        <button className="blue-btn"> onClick={handleSubmit} Go To Payment </button>
+      <button className="nav-button" onClick={handleSubmit}> Go To Payment </button>
       </div>
     
   );
