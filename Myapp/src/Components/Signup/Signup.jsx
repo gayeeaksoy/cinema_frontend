@@ -120,7 +120,7 @@ const Signup = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    {emailError && <p style={{ color: 'red' }}>{emailError}</p>}
+                    {emailError && <p style={{ color: 'red', fontSize:'12px' }}>{emailError}</p>}
 
                 </div>
                 <div className="input1">
@@ -131,7 +131,7 @@ const Signup = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
+                    {passwordError && <p style={{ color: 'red', fontSize:'12px' }}>{passwordError}</p>}
                 </div>
             </div>
             <div className="submit-container">
